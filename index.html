@@ -109,14 +109,20 @@
         }
 
 
+
         @media (max-width: 768px) {
-           #cursor {
-               display: none !important;
-              }
-           #cursor-follower {
-               display: none !important;
-           }
-       }
+        .cursor {
+         display: none !important;
+        }
+        .cursor-follower {
+        display: none !important;
+        }
+        body {
+        cursor: auto !important; /* biar pakai cursor default HP */
+        }
+      }
+
+
 
 
         
@@ -440,6 +446,28 @@
         // Custom cursor effect
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
+
+
+
+        function toggleCursor() {
+    if (window.innerWidth <= 768) {
+      // Mobile / tablet
+      cursor.style.display = "none";
+      follower.style.display = "none";
+      document.body.style.cursor = "auto"; 
+    } else {
+      // Desktop
+      cursor.style.display = "block";
+      follower.style.display = "block";
+      document.body.style.cursor = "none"; 
+    }
+  }
+
+  // Cek pertama kali
+  toggleCursor();
+
+  // Kalau user resize layar
+  window.addEventListener("resize", toggleCursor);
         
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
